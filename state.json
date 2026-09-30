@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-09-30T11:33:07.556093+05:30",
+  "as_of": "2026-09-30T13:00:59.966853+05:30",
   "brand": {
     "name": "voxyn",
     "timezone": "Asia/Kolkata"
@@ -12,9 +12,9 @@
       "failed": 0,
       "generated": 5,
       "missed": 0,
-      "posted": 1,
+      "posted": 2,
       "processing": 0,
-      "ready": 4,
+      "ready": 3,
       "source_insufficient": 0
     }
   ],
@@ -25,7 +25,7 @@
   },
   "next_post": {
     "post_type": "IMAGE",
-    "scheduled_local": "12:30",
+    "scheduled_local": "13:30",
     "status": "READY",
     "topic": "Next production post"
   },
@@ -42,7 +42,7 @@
     {
       "post_type": "IMAGE",
       "scheduled_local": "12:30",
-      "status": "READY",
+      "status": "POSTED",
       "topic": "Slot 2"
     },
     {
@@ -73,7 +73,7 @@
     },
     {
       "at": "2026-09-30",
-      "count": 1,
+      "count": 2,
       "kind": "PUBLISHER",
       "result": "POSTED"
     }
@@ -89,7 +89,7 @@
       "local_time": "12:30",
       "post_type": "IMAGE",
       "slot": "Slot 2",
-      "status": "READY"
+      "status": "POSTED"
     },
     {
       "local_time": "13:30",
@@ -116,7 +116,7 @@
     "content_engine": "HEALTHY",
     "linkedin": "HEALTHY",
     "publisher": "PAUSED",
-    "scheduler": "UNKNOWN",
+    "scheduler": "ACTIVE",
     "slack": "READY",
     "source_pipeline": "HEALTHY"
   },
@@ -126,10 +126,10 @@
     "failed": 0,
     "generated": 5,
     "missed": 0,
-    "posted": 1,
+    "posted": 2,
     "processing": 0,
-    "ready": 4,
+    "ready": 3,
     "source_insufficient": 0
   },
-  "updated_at": "2026-09-30T11:33:07.556093+05:30"
+  "updated_at": "2026-09-30T13:00:59.966853+05:30"
 }
