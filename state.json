@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-01T11:13:11.528064+05:30",
+  "as_of": "2026-10-01T12:01:10.631220+05:30",
   "brand": {
     "name": "voxyn",
     "timezone": "Asia/Kolkata"
@@ -24,9 +24,9 @@
       "failed": 0,
       "generated": 5,
       "missed": 0,
-      "posted": 0,
+      "posted": 1,
       "processing": 0,
-      "ready": 5,
+      "ready": 4,
       "source_insufficient": 0
     }
   ],
@@ -41,7 +41,7 @@
   },
   "next_post": {
     "post_type": "IMAGE",
-    "scheduled_local": "11:30",
+    "scheduled_local": "12:30",
     "status": "READY",
     "topic": "Next production post"
   },
@@ -52,7 +52,7 @@
     {
       "post_type": "IMAGE",
       "scheduled_local": "11:30",
-      "status": "READY",
+      "status": "POSTED",
       "topic": "Slot 1"
     },
     {
@@ -82,7 +82,7 @@
   ],
   "recent_activity": [
     {
-      "at": "2026-10-01T05:42:50.416900+00:00",
+      "at": "2026-10-01",
       "count": 1,
       "kind": "DAILY_GENERATION",
       "result": "SUCCESS"
@@ -90,8 +90,8 @@
     {
       "at": "2026-10-01",
       "count": 1,
-      "kind": "DAILY_GENERATION",
-      "result": "SUCCESS"
+      "kind": "PUBLISHER",
+      "result": "POSTED"
     },
     {
       "at": "2026-09-30",
@@ -105,7 +105,7 @@
       "local_time": "11:30",
       "post_type": "IMAGE",
       "slot": "Slot 1",
-      "status": "READY"
+      "status": "POSTED"
     },
     {
       "local_time": "12:30",
@@ -148,10 +148,10 @@
     "failed": 0,
     "generated": 5,
     "missed": 0,
-    "posted": 0,
+    "posted": 1,
     "processing": 0,
-    "ready": 5,
+    "ready": 4,
     "source_insufficient": 0
   },
-  "updated_at": "2026-10-01T11:13:11.528064+05:30"
+  "updated_at": "2026-10-01T12:01:10.631220+05:30"
 }
