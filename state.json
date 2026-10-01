@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-09-30T18:01:14.323243+05:30",
+  "as_of": "2026-10-01T11:13:11.528064+05:30",
   "brand": {
     "name": "voxyn",
     "timezone": "Asia/Kolkata"
@@ -16,14 +16,35 @@
       "processing": 0,
       "ready": 0,
       "source_insufficient": 0
+    },
+    {
+      "auth_required": 0,
+      "date": "2026-10-01",
+      "expected": 5,
+      "failed": 0,
+      "generated": 5,
+      "missed": 0,
+      "posted": 0,
+      "processing": 0,
+      "ready": 5,
+      "source_insufficient": 0
     }
   ],
   "evidence": {
+    "automation_execution_enabled": true,
+    "dry_run": false,
     "linkedin_access": "VERIFIED",
-    "publisher_mode": "DISABLED",
+    "publisher_enabled": true,
+    "publisher_mode": "LIVE",
+    "publisher_reason": "LIVE_CONFIGURATION",
     "safe_launch_verified": false
   },
-  "next_post": null,
+  "next_post": {
+    "post_type": "IMAGE",
+    "scheduled_local": "11:30",
+    "status": "READY",
+    "topic": "Next production post"
+  },
   "profile": "public_pages",
   "publisher_grace_minutes": 70,
   "publishing_block": null,
@@ -31,37 +52,43 @@
     {
       "post_type": "IMAGE",
       "scheduled_local": "11:30",
-      "status": "POSTED",
+      "status": "READY",
       "topic": "Slot 1"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "12:30",
-      "status": "POSTED",
+      "status": "READY",
       "topic": "Slot 2"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "13:30",
-      "status": "POSTED",
+      "status": "READY",
       "topic": "Slot 3"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "16:30",
-      "status": "POSTED",
+      "status": "READY",
       "topic": "Slot 4"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "17:30",
-      "status": "POSTED",
+      "status": "READY",
       "topic": "Slot 5"
     }
   ],
   "recent_activity": [
     {
-      "at": "2026-09-30",
+      "at": "2026-10-01T05:42:50.416900+00:00",
+      "count": 1,
+      "kind": "DAILY_GENERATION",
+      "result": "SUCCESS"
+    },
+    {
+      "at": "2026-10-01",
       "count": 1,
       "kind": "DAILY_GENERATION",
       "result": "SUCCESS"
@@ -78,31 +105,31 @@
       "local_time": "11:30",
       "post_type": "IMAGE",
       "slot": "Slot 1",
-      "status": "POSTED"
+      "status": "READY"
     },
     {
       "local_time": "12:30",
       "post_type": "IMAGE",
       "slot": "Slot 2",
-      "status": "POSTED"
+      "status": "READY"
     },
     {
       "local_time": "13:30",
       "post_type": "IMAGE",
       "slot": "Slot 3",
-      "status": "POSTED"
+      "status": "READY"
     },
     {
       "local_time": "16:30",
       "post_type": "IMAGE",
       "slot": "Slot 4",
-      "status": "POSTED"
+      "status": "READY"
     },
     {
       "local_time": "17:30",
       "post_type": "IMAGE",
       "slot": "Slot 5",
-      "status": "POSTED"
+      "status": "READY"
     }
   ],
   "schema_version": 4,
@@ -110,7 +137,7 @@
     "ai_provider": "HEALTHY",
     "content_engine": "HEALTHY",
     "linkedin": "HEALTHY",
-    "publisher": "PAUSED",
+    "publisher": "HEALTHY",
     "scheduler": "ACTIVE",
     "slack": "READY",
     "source_pipeline": "HEALTHY"
@@ -121,10 +148,10 @@
     "failed": 0,
     "generated": 5,
     "missed": 0,
-    "posted": 5,
+    "posted": 0,
     "processing": 0,
-    "ready": 0,
+    "ready": 5,
     "source_insufficient": 0
   },
-  "updated_at": "2026-09-30T18:01:14.323243+05:30"
+  "updated_at": "2026-10-01T11:13:11.528064+05:30"
 }
