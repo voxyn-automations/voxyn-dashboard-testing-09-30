@@ -67,7 +67,7 @@ jobs:
           for asset in manifest['assets'].values():
               if asset not in html or not (root / asset).is_file():
                   raise SystemExit(f'DASHBOARD_ASSET_PROVENANCE_FAILED: missing current asset {asset}')
-          supported = (1, 2, 3, 4)
+          supported = (1, 2, 3, 4, 5)
           detected = state.get('schema_version')
           if isinstance(detected, bool) or detected not in supported:
               label = 'missing' if detected is None else str(detected)

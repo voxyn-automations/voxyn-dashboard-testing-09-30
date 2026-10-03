@@ -1,31 +1,31 @@
 {
   "assets": {
-    "css": "static/operations.0bb33c9f2475.css",
+    "css": "static/operations.befa9d69012a.css",
     "favicon": "static/voxyn-favicon.057a1c896ec5.png",
-    "js": "static/operations.2e6c69960ded.js",
+    "js": "static/operations.63a153f4b41c.js",
     "logo": "static/voxyn-logo.057a1c896ec5.png",
     "theme": "static/theme.c2a79630e611.js"
   },
-  "build": "fa3c3d5a2cc7",
-  "fingerprint": "1.0.1/fa3c3d5a2cc7",
+  "build": "e991c1f6c252",
+  "fingerprint": "1.0.2/e991c1f6c252",
   "managed_files": [
     "index.html",
     "state.json",
-    "static/operations.0bb33c9f2475.css",
-    "static/operations.2e6c69960ded.js",
+    "static/operations.63a153f4b41c.js",
+    "static/operations.befa9d69012a.css",
     "static/theme.c2a79630e611.js",
     "static/voxyn-favicon.057a1c896ec5.png",
     "static/voxyn-logo.057a1c896ec5.png",
     "voxyn-managed.json"
   ],
   "managed_sha256": {
-    "index.html": "5ba4fd862be60f8372f688c3c1590be43ea1a47b8090b95ec70e53a61bce7df4",
-    "static/operations.0bb33c9f2475.css": "0bb33c9f2475c650a0b122a57539f0b878a1adb9b919add2f761c1d4313399c9",
-    "static/operations.2e6c69960ded.js": "2e6c69960dedc3843fe67ef0a8f751c2f574d8d50d6f0084a1b814d572dfda06",
+    "index.html": "15fe8d57f814e8fa2fefb04654ce515103d23395fa273a4837bded191e53272b",
+    "static/operations.63a153f4b41c.js": "63a153f4b41c904a15f9e57edcfc230944f6892103880caadb50bf37d8f94aeb",
+    "static/operations.befa9d69012a.css": "befa9d69012a17d9fd50820c07c8d16e24be086d2280677c1270c0ec521358cb",
     "static/theme.c2a79630e611.js": "c2a79630e611650046d94b6f08df4e49c9785232a51c9b97ae68166dee543c14",
     "static/voxyn-favicon.057a1c896ec5.png": "057a1c896ec551a37ca633d331cdd7dbee487d8e613615174de996ea0a49c98f",
     "static/voxyn-logo.057a1c896ec5.png": "057a1c896ec551a37ca633d331cdd7dbee487d8e613615174de996ea0a49c98f"
   },
-  "release": "1.0.1",
+  "release": "1.0.2",
   "schema_version": 1
 }

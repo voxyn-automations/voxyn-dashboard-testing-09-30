@@ -17,11 +17,10 @@ function buyerDate(value,timezone){return zonedParts(new Date(value),timezone).d
 function authoritativeNow(data,override){return override||new Date(data.as_of||data.updated_at||Date.now())}
 function currentDayView(data,now=null){
   if(!data.updated_at||!data.brand?.timezone)return data;
-  now=authoritativeNow(data,now);
-  const today=buyerDate(now,data.brand.timezone),snapshotDay=buyerDate(data.updated_at,data.brand.timezone);
+  now=now||new Date();
+  const today=buyerDate(now,data.brand.timezone),snapshotDay=data.snapshot_date||buyerDate(data.updated_at,data.brand.timezone);
   if(snapshotDay===today)return data;
-  const emptyStatus=row=>({...row,status:"UNKNOWN"});
-  return {...data,today:{...data.today,generated:0,ready:0,processing:0,posted:0,failed:0,auth_required:0,missed:0,source_insufficient:0},queue:(data.queue||[]).map(emptyStatus),schedule:(data.schedule||[]).map(emptyStatus),next_post:null};
+  return {...data,today:{configured:data.today.configured,generated:null,ready:null,processing:null,posted:null,failed:null,auth_required:null,missed:null,source_insufficient:null},queue:[],schedule:(data.schedule||[]).map(row=>({...row,status:"UNKNOWN"})),next_post:null,_awaitingToday:true};
 }
 function shiftDate(iso,days){const value=new Date(iso+"T12:00:00Z");value.setUTCDate(value.getUTCDate()+days);return value.toISOString().slice(0,10)}
 function metric(value){return value===null||value===undefined?"—":value}
@@ -29,7 +28,7 @@ function rangeRows(data){
   const rows=Array.isArray(data.daily_history)?data.daily_history:[];
   if(selectedRange==="all")return rows;
   if(selectedRange==="custom"&&customRange)return rows.filter(row=>row.date>=customRange.from&&row.date<=customRange.to);
-  const now=authoritativeNow(data),today=data.brand.timezone?buyerDate(now,data.brand.timezone):now.toISOString().slice(0,10),days=Number(selectedRange)||1,from=shiftDate(today,1-days);
+  const now=new Date(),today=data.brand.timezone?buyerDate(now,data.brand.timezone):now.toISOString().slice(0,10),days=Number(selectedRange)||1,from=shiftDate(today,1-days);
   return rows.filter(row=>row.date>=from&&row.date<=today);
 }
 function totals(rows){
@@ -94,7 +93,7 @@ function renderPeriod(data){
 function scheduleState(data,now=null){
   const schedule=Array.isArray(data.schedule)?data.schedule:[];
   if(!schedule.length)return {kind:"EMPTY"};
-  now=authoritativeNow(data,now);
+  now=now||new Date();
   const current=zonedParts(now,data.brand.timezone),snapshotDay=data.updated_at?buyerDate(data.updated_at,data.brand.timezone):current.date;
   if(snapshotDay!==current.date)return {kind:"WAITING",next:schedule[0]};
   const rows=schedule.map((row,index)=>({...row,index,minutes:Number(row.local_time.slice(0,2))*60+Number(row.local_time.slice(3,5))})).sort((a,b)=>a.minutes-b.minutes||a.index-b.index);
@@ -120,22 +119,24 @@ function renderSchedule(data,now=null){
   target.innerHTML=`<h2>Schedule complete</h2>${unresolved}<p>Next scheduled window: Tomorrow ${esc(state.next.local_time)}</p>${capability}`;
 }
 function clock(){if(!currentTimezone)return;document.querySelector("#live-time").textContent=new Intl.DateTimeFormat("en-US",{timeZone:currentTimezone,hour:"numeric",minute:"2-digit",second:"2-digit",hour12:true}).format(new Date());document.querySelector("#live-date").textContent=new Intl.DateTimeFormat("en-US",{timeZone:currentTimezone,dateStyle:"full"}).format(new Date())}
+function renderFreshness(data){const synced=!!data.updated_at,now=new Date(),zone=data.brand?.timezone||"UTC",viewDate=buyerDate(now,zone);document.querySelector("#viewing-date").textContent=synced?`Viewing ${viewDate} · ${zone}`:"Viewing date unavailable";if(!synced){document.querySelector("#freshness-state").textContent="AWAITING FIRST SYNC";document.querySelector("#freshness-message").textContent="Today’s activity has not been synchronized yet.";return}const age=Math.max(0,now-new Date(data.as_of||data.updated_at)),snapshotDay=data.snapshot_date||buyerDate(data.updated_at,zone),stale=snapshotDay!==viewDate||age>90*60*1000;document.querySelector("#freshness-state").textContent=stale?"STALE SNAPSHOT":"FRESH SNAPSHOT";document.querySelector("#freshness-message").textContent=snapshotDay!==viewDate?`New day — awaiting today’s generation status. Last verified activity: ${snapshotDay}.`:`Latest verified snapshot is ${Math.floor(age/60000)} minutes old.`}
+function renderWorkflows(data){const target=document.querySelector("#workflow-health");if(!target)return;const rows=Array.isArray(data.workflows)?data.workflows:[];target.innerHTML=rows.length?rows.map(row=>`<article class="workflow-card"><h3>${esc(row.label)}</h3>${badge(row.state)}<p>${esc(row.outcome==="NO_ELIGIBLE_POSTS"?"Succeeded — no eligible posts.":row.outcome==="PARTIAL_GROUNDED_BATCH"?"Succeeded with a partial grounded batch.":row.outcome==="UNVERIFIED"?"Execution status unverified.":label(row.outcome))}</p>${row.observed_at?`<small>Observed ${esc(new Date(row.observed_at).toLocaleString("en-US",{timeZone:data.brand.timezone}))}</small>`:""}</article>`).join(""):'<div class="empty-state">Workflow execution status is unverified.</div>'}
 function syncThemeButton(){const dark=document.documentElement.dataset.theme==="dark",button=document.querySelector("#theme-toggle");button.setAttribute("aria-pressed",String(dark));button.querySelector("span").textContent=dark?"☾":"☀";button.querySelector("strong").textContent=dark?"Dark":"Light"}
 function render(data){
-  if(![1,2,3,4].includes(data.schema_version)||!data.brand||!Array.isArray(data.queue))throw new Error("snapshot schema");
+  if(![1,2,3,4,5].includes(data.schema_version)||!data.brand||!Array.isArray(data.queue))throw new Error("snapshot schema");
   data.evidence=data.evidence||{safe_launch_verified:false,linkedin_access:data.publishing_block?"ACTION_REQUIRED":"UNKNOWN",publisher_mode:data.system.publisher==="PAUSED"?"DISABLED":"LIVE"};
   data=currentDayView(data);
   const query=selector=>document.querySelector(selector),synced=!!data.updated_at,publicView=data.profile==="public_pages";snapshot=data;currentTimezone=synced?data.brand.timezone:"";
   const buyerName=String(data.brand.name||"").trim(),identity=query("#buyer-identity");query("#buyer-name").textContent=buyerName;identity.hidden=!buyerName||buyerName.toUpperCase()==="VOXYN";document.title="VOXYN | LinkedIn Automation Control Center";
-  query("#timezone").textContent=currentTimezone||"Not yet synchronized";query("#updated").textContent=synced?"Updated "+new Date(data.updated_at).toLocaleString("en-US",{timeZone:currentTimezone,dateStyle:"medium",timeStyle:"short"}):"Not yet synchronized";
-  query("#system-status strong").textContent=!synced?"Waiting for first sync":data.publishing_block?"Action required":"Snapshot synchronized";query("#system-status").className="system-status "+(data.publishing_block?"level-warning":"level-healthy");
+  query("#timezone").textContent=currentTimezone||"Not yet synchronized";query("#updated").textContent=synced?"Last synchronized "+new Date(data.updated_at).toLocaleString("en-US",{timeZone:currentTimezone,dateStyle:"medium",timeStyle:"short"}):"Not yet synchronized";
+  const stale=synced&&(data.snapshot_date||buyerDate(data.updated_at,currentTimezone))!==buyerDate(new Date(),currentTimezone);query("#system-status strong").textContent=!synced?"Waiting for first sync":data.publishing_block?"Action required":stale?"Snapshot stale":"Snapshot current";query("#system-status").className="system-status "+(data.publishing_block||stale?"level-warning":"level-healthy");
   query("#health").innerHTML=Object.entries(data.system).map(([name,status])=>{let detail="";if(name==="scheduler"&&status==="UNKNOWN")detail='<p>No recent external scheduler run has been observed.</p>';if(["content_engine","source_pipeline","ai_provider","slack"].includes(name)&&data.evidence.safe_launch_verified&&!data.today.generated)detail='<p>Safe Launch capability verified; no production run recorded today.</p>';if(name==="publisher"&&status==="PAUSED"&&!data.publishing_block)detail='<p>Publishing is intentionally disabled by configuration.</p>';return '<article class="health-card '+(status==="ACTION_REQUIRED"?"action-required":["HEALTHY","READY","ACTIVE"].includes(status)?"healthy":status==="UNKNOWN"?"unknown":"warning")+'"><span class="health-icon">✦</span><div><h3>'+esc(label(name))+'</h3>'+badge(statuses.has(status)?status:"UNKNOWN")+detail+'</div></article>'}).join("");
   document.querySelectorAll("thead th").forEach((cell,index)=>{if(!cell.closest(".daily-table"))cell.hidden=publicView&&index>3});
   query("#queue").innerHTML=data.queue.length?data.queue.map(item=>'<tr><td>'+esc(item.scheduled_local)+'</td><td>'+esc(item.topic)+'</td><td>'+esc(item.post_type)+'</td><td>'+badge(item.status)+'</td>'+(publicView?"":'<td>'+esc(item.template)+'</td><td>'+esc(item.source_publisher)+'</td><td>'+esc(item.post_id)+'</td>')+'</tr>').join(""):'<tr><td colspan="7" class="table-empty">No synchronized data yet.</td></tr>';
   query("#mobile-queue").innerHTML=data.queue.length?data.queue.map(item=>'<article class="history-card"><div class="history-card-head"><h3>'+esc(item.topic)+'</h3>'+badge(item.status)+'</div><p class="history-meta">'+esc(item.scheduled_local)+" · "+esc(item.post_type)+'</p></article>').join(""):'<div class="empty-state">Waiting for first automation sync.</div>';
   query("#today-empty").hidden=!synced||Number(data.today.generated||0)!==0||Number(data.today.posted||0)!==0||Number(data.today.ready||0)!==0;query("#today-empty").textContent=data.evidence.safe_launch_verified?"No production run has completed today. Safe Launch capability verification passed.":"No synchronized production activity yet today.";query("#alert").hidden=!data.publishing_block;if(data.publishing_block){query("#auth-title").textContent="Publishing paused";query("#auth-description").textContent="Publishing is paused until LinkedIn access is restored.";query("#alert").textContent=data.publishing_block.message}else if(data.evidence.linkedin_access==="VERIFIED"){query("#auth-title").textContent="LinkedIn access verified";query("#auth-description").textContent="Recent read-only identity evidence confirms the configured connection."}else if(data.evidence.linkedin_access==="CONFIGURED_UNVERIFIED"){query("#auth-title").textContent="LinkedIn access configured";query("#auth-description").textContent="Credentials are configured, but no recent durable identity verification is available."}else{query("#auth-title").textContent="LinkedIn access not yet verified";query("#auth-description").textContent="No durable connection evidence is available yet. Credentials and identities are never displayed."}
   query("#activity").innerHTML=data.recent_activity.length?data.recent_activity.map(item=>'<li class="activity-'+esc(item.result.toLowerCase())+'"><span class="timeline-marker"></span><div><time>'+esc(item.at||"")+'</time><strong>'+esc(label(item.kind))+'</strong><span>'+esc(item.count?`${item.count} ${label(item.result).toLowerCase()} post${item.count===1?"":"s"}`:label(item.result))+'</span></div></li>').join(""):'<li class="empty-state">No synchronized activity yet.</li>';
-  renderPeriod(data);renderSchedule(data);query("#copyright-year").textContent=String(new Date().getFullYear());query("#error").hidden=true;syncThemeButton();clock();
+  renderPeriod(data);renderSchedule(data);renderFreshness(data);renderWorkflows(data);query("#copyright-year").textContent=String(new Date().getFullYear());query("#error").hidden=true;syncThemeButton();clock();
 }
 function refresh(){return fetch("state.json",{cache:"no-store"}).then(response=>{if(!response.ok)throw new Error("snapshot");return response.json()}).then(render).catch(()=>{document.querySelector("#error").hidden=false})}
 document.querySelector("#theme-toggle").addEventListener("click",()=>{window.VoxynTheme.set(window.VoxynTheme.get()==="dark"?"light":"dark");syncThemeButton()});
