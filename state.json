@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-01T18:01:02.918579+05:30",
+  "as_of": "2026-10-03T20:33:45.386906+05:30",
   "brand": {
     "name": "voxyn",
     "timezone": "Asia/Kolkata"
@@ -47,41 +47,35 @@
     {
       "post_type": "IMAGE",
       "scheduled_local": "11:30",
-      "status": "POSTED",
+      "status": "UNKNOWN",
       "topic": "Slot 1"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "12:30",
-      "status": "POSTED",
+      "status": "UNKNOWN",
       "topic": "Slot 2"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "13:30",
-      "status": "POSTED",
+      "status": "UNKNOWN",
       "topic": "Slot 3"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "16:30",
-      "status": "POSTED",
+      "status": "UNKNOWN",
       "topic": "Slot 4"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "17:30",
-      "status": "POSTED",
+      "status": "UNKNOWN",
       "topic": "Slot 5"
     }
   ],
   "recent_activity": [
-    {
-      "at": "2026-10-01",
-      "count": 1,
-      "kind": "DAILY_GENERATION",
-      "result": "SUCCESS"
-    },
     {
       "at": "2026-10-01",
       "count": 5,
@@ -100,40 +94,41 @@
       "local_time": "11:30",
       "post_type": "IMAGE",
       "slot": "Slot 1",
-      "status": "POSTED"
+      "status": "UNKNOWN"
     },
     {
       "local_time": "12:30",
       "post_type": "IMAGE",
       "slot": "Slot 2",
-      "status": "POSTED"
+      "status": "UNKNOWN"
     },
     {
       "local_time": "13:30",
       "post_type": "IMAGE",
       "slot": "Slot 3",
-      "status": "POSTED"
+      "status": "UNKNOWN"
     },
     {
       "local_time": "16:30",
       "post_type": "IMAGE",
       "slot": "Slot 4",
-      "status": "POSTED"
+      "status": "UNKNOWN"
     },
     {
       "local_time": "17:30",
       "post_type": "IMAGE",
       "slot": "Slot 5",
-      "status": "POSTED"
+      "status": "UNKNOWN"
     }
   ],
-  "schema_version": 4,
+  "schema_version": 5,
+  "snapshot_date": "2026-10-03",
   "system": {
     "ai_provider": "HEALTHY",
     "content_engine": "HEALTHY",
     "linkedin": "HEALTHY",
     "publisher": "HEALTHY",
-    "scheduler": "ACTIVE",
+    "scheduler": "UNKNOWN",
     "slack": "READY",
     "source_pipeline": "HEALTHY"
   },
@@ -141,12 +136,54 @@
     "auth_required": 0,
     "configured": 5,
     "failed": 0,
-    "generated": 5,
+    "generated": 0,
     "missed": 0,
-    "posted": 5,
+    "posted": 0,
     "processing": 0,
     "ready": 0,
     "source_insufficient": 0
   },
-  "updated_at": "2026-10-01T18:01:02.918579+05:30"
+  "updated_at": "2026-10-03T20:33:45.386906+05:30",
+  "workflows": [
+    {
+      "count": null,
+      "enabled": true,
+      "id": "daily_generation",
+      "label": "Daily content generation and Slack delivery",
+      "observed_at": "2026-10-03T01:50:15Z",
+      "outcome": "SUCCESS",
+      "reason": "RECORDED_OUTCOME",
+      "state": "SUCCEEDED"
+    },
+    {
+      "count": 0,
+      "enabled": true,
+      "id": "linkedin_publisher",
+      "label": "LinkedIn Publisher",
+      "observed_at": "2026-10-03T14:30:29Z",
+      "outcome": "NO_ELIGIBLE_POSTS",
+      "reason": "RECORDED_OUTCOME",
+      "state": "SUCCEEDED"
+    },
+    {
+      "count": null,
+      "enabled": false,
+      "id": "linkedin_auth_health",
+      "label": "LinkedIn authorization check",
+      "observed_at": "",
+      "outcome": "DISABLED",
+      "reason": "CONFIGURATION_DISABLED",
+      "state": "PAUSED"
+    },
+    {
+      "count": null,
+      "enabled": true,
+      "id": "dashboard_sync",
+      "label": "Dashboard Sync",
+      "observed_at": "2026-10-03T14:30:41Z",
+      "outcome": "SUCCESS",
+      "reason": "RECORDED_OUTCOME",
+      "state": "SUCCEEDED"
+    }
+  ]
 }
