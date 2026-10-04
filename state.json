@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-03T20:33:45.386906+05:30",
+  "as_of": "2026-10-04T09:15:12.836063+05:30",
   "brand": {
     "name": "voxyn",
     "timezone": "Asia/Kolkata"
@@ -122,7 +122,7 @@
     }
   ],
   "schema_version": 5,
-  "snapshot_date": "2026-10-03",
+  "snapshot_date": "2026-10-04",
   "system": {
     "ai_provider": "HEALTHY",
     "content_engine": "HEALTHY",
@@ -143,7 +143,7 @@
     "ready": 0,
     "source_insufficient": 0
   },
-  "updated_at": "2026-10-03T20:33:45.386906+05:30",
+  "updated_at": "2026-10-04T09:15:12.836063+05:30",
   "workflows": [
     {
       "count": null,
@@ -160,7 +160,7 @@
       "enabled": true,
       "id": "linkedin_publisher",
       "label": "LinkedIn Publisher",
-      "observed_at": "2026-10-03T14:30:29Z",
+      "observed_at": "2026-10-04T03:30:30Z",
       "outcome": "NO_ELIGIBLE_POSTS",
       "reason": "RECORDED_OUTCOME",
       "state": "SUCCEEDED"
@@ -180,7 +180,7 @@
       "enabled": true,
       "id": "dashboard_sync",
       "label": "Dashboard Sync",
-      "observed_at": "2026-10-03T14:30:41Z",
+      "observed_at": "2026-10-04T03:30:54Z",
       "outcome": "SUCCESS",
       "reason": "RECORDED_OUTCOME",
       "state": "SUCCEEDED"
