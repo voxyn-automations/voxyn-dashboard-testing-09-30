@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-04T23:48:44.462544+05:30",
+  "as_of": "2026-10-05T06:06:33.086976+05:30",
   "brand": {
     "name": "voxyn",
     "timezone": "Asia/Kolkata"
@@ -59,41 +59,35 @@
     {
       "post_type": "IMAGE",
       "scheduled_local": "11:30",
-      "status": "MISSED",
+      "status": "UNKNOWN",
       "topic": "Slot 1"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "12:30",
-      "status": "MISSED",
+      "status": "UNKNOWN",
       "topic": "Slot 2"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "13:30",
-      "status": "MISSED",
+      "status": "UNKNOWN",
       "topic": "Slot 3"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "16:30",
-      "status": "MISSED",
+      "status": "UNKNOWN",
       "topic": "Slot 4"
     },
     {
       "post_type": "IMAGE",
       "scheduled_local": "17:30",
-      "status": "MISSED",
+      "status": "UNKNOWN",
       "topic": "Slot 5"
     }
   ],
   "recent_activity": [
-    {
-      "at": "2026-10-04",
-      "count": 1,
-      "kind": "DAILY_GENERATION",
-      "result": "SUCCESS"
-    },
     {
       "at": "2026-10-04",
       "count": 5,
@@ -118,35 +112,35 @@
       "local_time": "11:30",
       "post_type": "IMAGE",
       "slot": "Slot 1",
-      "status": "MISSED"
+      "status": "UNKNOWN"
     },
     {
       "local_time": "12:30",
       "post_type": "IMAGE",
       "slot": "Slot 2",
-      "status": "MISSED"
+      "status": "UNKNOWN"
     },
     {
       "local_time": "13:30",
       "post_type": "IMAGE",
       "slot": "Slot 3",
-      "status": "MISSED"
+      "status": "UNKNOWN"
     },
     {
       "local_time": "16:30",
       "post_type": "IMAGE",
       "slot": "Slot 4",
-      "status": "MISSED"
+      "status": "UNKNOWN"
     },
     {
       "local_time": "17:30",
       "post_type": "IMAGE",
       "slot": "Slot 5",
-      "status": "MISSED"
+      "status": "UNKNOWN"
     }
   ],
   "schema_version": 5,
-  "snapshot_date": "2026-10-04",
+  "snapshot_date": "2026-10-05",
   "system": {
     "ai_provider": "HEALTHY",
     "content_engine": "HEALTHY",
@@ -160,14 +154,14 @@
     "auth_required": 0,
     "configured": 5,
     "failed": 0,
-    "generated": 5,
-    "missed": 5,
+    "generated": 0,
+    "missed": 0,
     "posted": 0,
     "processing": 0,
     "ready": 0,
     "source_insufficient": 0
   },
-  "updated_at": "2026-10-04T23:48:44.462544+05:30",
+  "updated_at": "2026-10-05T06:06:33.086976+05:30",
   "workflows": [
     {
       "count": null,
@@ -204,7 +198,7 @@
       "enabled": true,
       "id": "dashboard_sync",
       "label": "Dashboard Sync",
-      "observed_at": "2026-10-04T06:47:37Z",
+      "observed_at": "2026-10-04T18:18:49Z",
       "outcome": "SUCCESS",
       "reason": "RECORDED_OUTCOME",
       "state": "SUCCEEDED"
