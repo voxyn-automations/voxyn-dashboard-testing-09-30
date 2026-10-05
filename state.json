@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-05T06:06:33.086976+05:30",
+  "as_of": "2026-10-05T18:04:25.342396+05:30",
   "brand": {
     "name": "voxyn",
     "timezone": "Asia/Kolkata"
@@ -161,17 +161,17 @@
     "ready": 0,
     "source_insufficient": 0
   },
-  "updated_at": "2026-10-05T06:06:33.086976+05:30",
+  "updated_at": "2026-10-05T18:04:25.342396+05:30",
   "workflows": [
     {
       "count": null,
       "enabled": true,
       "id": "daily_generation",
       "label": "Daily content generation and Slack delivery",
-      "observed_at": "2026-10-04T05:42:26Z",
-      "outcome": "SUCCESS",
+      "observed_at": "2026-10-05T05:41:51Z",
+      "outcome": "FAILED",
       "reason": "RECORDED_OUTCOME",
-      "state": "SUCCEEDED"
+      "state": "FAILED"
     },
     {
       "count": null,
@@ -198,7 +198,7 @@
       "enabled": true,
       "id": "dashboard_sync",
       "label": "Dashboard Sync",
-      "observed_at": "2026-10-04T18:18:49Z",
+      "observed_at": "2026-10-05T05:42:03Z",
       "outcome": "SUCCESS",
       "reason": "RECORDED_OUTCOME",
       "state": "SUCCEEDED"
